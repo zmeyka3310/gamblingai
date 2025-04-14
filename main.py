@@ -5,7 +5,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from datetime import datetime
-import data_processing  # Import the data processing functions
+import preprocessing  # Import the data processing functions
 
 # --- Configuration ---
 CSV_FILE_PATH = '/home/zmeyka/repos/gamblingai/historicaldata/HDaapl5y.csv'  # Replace with your CSV file path
@@ -48,7 +48,7 @@ def predict_next_value(model, last_sequence, scaler):
 
 def main():
     """Main function to load, preprocess, train, and predict."""
-    data, df = data_processing.load_and_preprocess_data(CSV_FILE_PATH, CLOSE_PRICE_COLUMN)
+    data, df = preprocessing.load_and_preprocess_data(CSV_FILE_PATH, CLOSE_PRICE_COLUMN)
 
     if data is None:
         print("Data loading or preprocessing failed.  Exiting.")
@@ -56,11 +56,11 @@ def main():
 
 
     # Scale the data
-    data, scaler = data_processing.scale_data(data)
+    data, scaler = preprocessing.scale_data(data)
 
 
     # Create sequences
-    X, y = data_processing.create_sequences(data, SEQUENCE_LENGTH)
+    X, y = preprocessing.create_sequences(data, SEQUENCE_LENGTH)
 
     # Split into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, shuffle=False)
