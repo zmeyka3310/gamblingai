@@ -10,11 +10,11 @@ import preprocessing  # Import the data processing functions
 # --- Configuration ---
 CSV_FILE_PATH = '/home/zmeyka/repos/gamblingai/historicaldata/HDaapl5y.csv'  # Replace with your CSV file path
 CLOSE_PRICE_COLUMN = 'Close/Last'
-SEQUENCE_LENGTH = 10  # Length of input sequence for the RNN
-TEST_SIZE = 0.2  # Proportion of data to use for testing
-LEARNING_RATE = 0.001
-EPOCHS = 50
-BATCH_SIZE = 32
+SEQUENCE_LENGTH = 30  # Length of input sequence for the RNN
+TEST_SIZE = 1  # Proportion of data to use for testing
+LEARNING_RATE = 0.0001
+EPOCHS = 250
+BATCH_SIZE = 100
 
 
 def build_rnn_model(input_shape):
