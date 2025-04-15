@@ -10,10 +10,10 @@ import preprocessing  # Import the data processing functions
 # --- Configuration ---
 CSV_FILE_PATH = '/home/zmeyka/repos/gamblingai/historicaldata/HDaapl5y.csv'  # Replace with your CSV file path
 PRICE_COLUMN = 'Open'
-SEQUENCE_LENGTH = 30  # Length of input sequence for the RNN
+SEQUENCE_LENGTH = 10  # Length of input sequence for the RNN
 TEST_SIZE = 1  # Proportion of data to use for testing
 LEARNING_RATE = 0.001
-EPOCHS = 250
+EPOCHS = 10
 BATCH_SIZE = 10
 
 
@@ -22,7 +22,13 @@ def build_rnn_model(input_shape):
     model = Sequential()
     model.add(LSTM(units=50, return_sequences=True, input_shape=input_shape))  # First LSTM layer
     model.add(Dropout(0.2))
-    model.add(LSTM(units=50, return_sequences=False))  # Second LSTM layer
+    model.add(LSTM(units=100, return_sequences=True))  # Second LSTM layer
+    model.add(Dropout(0.2))
+    model.add(LSTM(units=100, return_sequences=True))  # Third LSTM layer
+    model.add(Dropout(0.2))
+    model.add(LSTM(units=100, return_sequences=True))  # Fourth LSTM layer
+    model.add(Dropout(0.2))
+    model.add(LSTM(units=50, return_sequences=False))  # Fifth LSTM layer
     model.add(Dropout(0.2))
     model.add(Dense(units=1))  # Output layer
     return model
@@ -83,7 +89,7 @@ def main():
     # Calculate the next day
     next_date = last_date + pd.Timedelta(days=1)
 
-    print(f"Predicted closing price for {next_date.strftime('%Y-%m-%d')}: ${predicted_price:.2f}")
+    print(f"Predicted price for {next_date.strftime('%Y-%m-%d')}: ${predicted_price:.2f}")
 
 if __name__ == "__main__":
     main()
