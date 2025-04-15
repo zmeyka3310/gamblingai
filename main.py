@@ -9,12 +9,12 @@ import preprocessing  # Import the data processing functions
 
 # --- Configuration ---
 CSV_FILE_PATH = '/home/zmeyka/repos/gamblingai/historicaldata/HDaapl5y.csv'  # Replace with your CSV file path
-CLOSE_PRICE_COLUMN = 'Close/Last'
+PRICE_COLUMN = 'Open'
 SEQUENCE_LENGTH = 30  # Length of input sequence for the RNN
 TEST_SIZE = 1  # Proportion of data to use for testing
-LEARNING_RATE = 0.0001
+LEARNING_RATE = 0.001
 EPOCHS = 250
-BATCH_SIZE = 100
+BATCH_SIZE = 10
 
 
 def build_rnn_model(input_shape):
@@ -48,7 +48,7 @@ def predict_next_value(model, last_sequence, scaler):
 
 def main():
     """Main function to load, preprocess, train, and predict."""
-    data, df = preprocessing.load_and_preprocess_data(CSV_FILE_PATH, CLOSE_PRICE_COLUMN)
+    data, df = preprocessing.load_and_preprocess_data(CSV_FILE_PATH, PRICE_COLUMN)
 
     if data is None:
         print("Data loading or preprocessing failed.  Exiting.")
