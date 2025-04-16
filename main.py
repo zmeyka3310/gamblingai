@@ -21,7 +21,6 @@ def build_rnn_model(input_shape):
     """Builds an LSTM-based RNN model."""
     model = Sequential()
     model.add(LSTM(units=50, return_sequences=True, input_shape=input_shape))  # First LSTM layer
-    model.add(Dropout(0.2))
     model.add(LSTM(units=100, return_sequences=True))  # Second LSTM layer
     model.add(Dropout(0.2))
     model.add(LSTM(units=100, return_sequences=True))  # Third LSTM layer
@@ -29,7 +28,7 @@ def build_rnn_model(input_shape):
     model.add(LSTM(units=100, return_sequences=True))  # Fourth LSTM layer
     model.add(Dropout(0.2))
     model.add(LSTM(units=50, return_sequences=False))  # Fifth LSTM layer
-    model.add(Dropout(0.2))
+    model.add(Dropout(0.1))
     model.add(Dense(units=1))  # Output layer
     return model
 
