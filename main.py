@@ -8,7 +8,7 @@ from datetime import datetime
 import preprocessing  # Import the data processing functions
 
 # --- Configuration ---
-CSV_FILE_PATH = '/home/zmeyka/repos/gamblingai/historicaldata/HDaapl5y.csv'  # Replace with your CSV file path
+CSV_FILE_PATH = 'historicaldata/HDaapl5y.csv'  # Replace with your CSV file path
 PRICE_COLUMN = 'Open'
 SEQUENCE_LENGTH = 10  # Length of input sequence for the RNN
 TEST_SIZE = 1  # Proportion of data to use for testing
