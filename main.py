@@ -12,8 +12,8 @@ CSV_FILE_PATH = '/home/zmeyka/repos/gamblingai/historicaldata/HDaapl5y.csv'  # R
 PRICE_COLUMN = 'Open'
 SEQUENCE_LENGTH = 10  # Length of input sequence for the RNN
 TEST_SIZE = 1  # Proportion of data to use for testing
-LEARNING_RATE = 0.001
-EPOCHS = 10
+LEARNING_RATE = 0.0001
+EPOCHS = 100
 BATCH_SIZE = 10
 
 
