@@ -4,7 +4,10 @@ from sklearn.preprocessing import MinMaxScaler
 
 def load_and_preprocess_data(csv_path, column_name):
     df = pd.read_csv(csv_path)
-    df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+    try:
+        df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+    except:
+        df['Date'] = pd.to_datetime(df['Date'], format='%Y-%m-%d')
     df = df.sort_values('Date')
     df = df.set_index('Date')
     df[column_name] = df[column_name].str.replace('$', '').astype(float)

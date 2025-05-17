@@ -7,8 +7,10 @@ from tensorflow.keras.optimizers import Adam
 from datetime import datetime
 import preprocessing  # Import the data processing functions
 
+
+
 # --- Configuration ---
-CSV_FILE_PATH = 'historicaldata/HDaapl5y.csv'  # Replace with your CSV file path
+# CSV_FILE_PATH = 'historicaldata/HDnvda5y.csv'  # Replace with your CSV file path
 PRICE_COLUMN = 'Open'
 SEQUENCE_LENGTH = 10  # Length of input sequence for the RNN
 TEST_SIZE = 1  # Proportion of data to use for testing
@@ -51,7 +53,7 @@ def predict_next_value(model, last_sequence, scaler):
     return predicted_value[0, 0]
 
 
-def main():
+def main(CSV_FILE_PATH):
     """Main function to load, preprocess, train, and predict."""
     data, df = preprocessing.load_and_preprocess_data(CSV_FILE_PATH, PRICE_COLUMN)
 
@@ -89,6 +91,7 @@ def main():
     next_date = last_date + pd.Timedelta(days=1)
 
     print(f"Predicted price for {next_date.strftime('%Y-%m-%d')}: ${predicted_price:.2f}")
+    return predicted_price
 
 if __name__ == "__main__":
     main()
