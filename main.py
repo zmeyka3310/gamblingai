@@ -56,40 +56,24 @@ def predict_next_value(model, last_sequence, scaler):
 def main(CSV_FILE_PATH):
     """Main function to load, preprocess, train, and predict."""
     data, df = preprocessing.load_and_preprocess_data(CSV_FILE_PATH, PRICE_COLUMN)
-
-    if data is None:
-        print("Data loading or preprocessing failed.  Exiting.")
-        return  # Exit if data loading/preprocessing failed
-
-
     # Scale the data
     data, scaler = preprocessing.scale_data(data)
-
-
     # Create sequences
     X, y = preprocessing.create_sequences(data, SEQUENCE_LENGTH)
-
     # Split into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, shuffle=False)
-
     # Build the RNN model
     model = build_rnn_model((SEQUENCE_LENGTH, 1))
-
     # Train the model
     model = train_model(model, X_train, y_train, EPOCHS, BATCH_SIZE, LEARNING_RATE)
-
     # Get the last sequence from the original scaled data
     last_sequence = data[-SEQUENCE_LENGTH:]
-
     # Predict the next value
     predicted_price = predict_next_value(model, last_sequence, scaler)
-
     # Get the last date from the original dataframe
     last_date = df.index[-1]
-
     # Calculate the next day
     next_date = last_date + pd.Timedelta(days=1)
-
     print(f"Predicted price for {next_date.strftime('%Y-%m-%d')}: ${predicted_price:.2f}")
     return predicted_price
 
